@@ -1,4 +1,4 @@
-package de.bremen.jTimetable ;
+package de.bremen.jTimetable.gui;
 
 public class Main {
     public static void main(String[] args){

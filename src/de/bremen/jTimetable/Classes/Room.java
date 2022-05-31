@@ -1,8 +1,20 @@
 package de.bremen.jTimetable.Classes;
 
 public class Room {
-    long id;
-    char roomcaption;
-    long reflocationid;
-    boolean active;
+    /**
+     *
+     */
+    private long id;
+    /**
+     *
+     */
+    private char roomCaption;
+    /**
+     * Reference to the Location.
+     */
+    private long refLocationId;
+    /**
+     *
+     */
+    private boolean active;
 }
