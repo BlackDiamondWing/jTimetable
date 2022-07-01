@@ -5,19 +5,15 @@ public class Lecturer extends GeneralValue{
     /**
      *
      */
-    private String firstname;
+    private String firstName;
     /**
      *
      */
-    private String lastname;
+    private String lastName;
     /**
      *
      */
     private int refLocationId;
-    /**
-     *
-     */
-    boolean active;
 
     /**
      * Constructor.
@@ -25,7 +21,7 @@ public class Lecturer extends GeneralValue{
      * @param caption
      * @param id
      */
-    public Lecturer(String caption, int id) {
-        super(caption, id);
+    public Lecturer(String caption, int id, boolean active) {
+        super(caption, id, active);
     }
 }

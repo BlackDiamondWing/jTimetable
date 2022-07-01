@@ -13,14 +13,20 @@ public abstract class GeneralValue {
      *
      */
     public int id;
+    /**
+     *
+     */
+    public boolean active;
 
     /**
-     * Constructor.
+     *
      * @param caption
      * @param id
+     * @param active
      */
-    public GeneralValue(String caption, int id) {
+    public GeneralValue(String caption, int id, boolean active) {
         this.caption = caption;
         this.id = id;
+        this.active = active;
     }
 }

@@ -5,10 +5,6 @@ package de.bremen.jTimetable.Classes;
  */
 public class Location extends GeneralValue{
 
-    /**
-     *
-     */
-    private boolean active;
 
     /**
      * Constructor.
@@ -16,7 +12,7 @@ public class Location extends GeneralValue{
      * @param caption
      * @param id
      */
-    public Location(String caption, int id) {
-        super(caption, id);
+    public Location(String caption, int id, boolean active) {
+        super(caption, id, active);
     }
 }

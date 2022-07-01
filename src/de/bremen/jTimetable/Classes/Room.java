@@ -1,20 +1,20 @@
 package de.bremen.jTimetable.Classes;
 
-public class Room {
-    /**
-     *
-     */
-    private long id;
-    /**
-     *
-     */
-    private char roomCaption;
+public class Room extends GeneralValue{
+
+
     /**
      * Reference to the Location.
      */
     private long refLocationId;
+
     /**
-     *
+     * @param caption
+     * @param id
+     * @param active
      */
-    private boolean active;
+    public Room(String caption, int id, boolean active) {
+        super(caption, id, active);
+    }
+
 }
