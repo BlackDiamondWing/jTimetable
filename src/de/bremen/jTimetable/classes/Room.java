@@ -1,4 +1,4 @@
-package de.bremen.jTimetable.Classes;
+package de.bremen.jTimetable.classes;
 
 public class Room extends GeneralValue{
 

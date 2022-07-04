@@ -1,6 +1,4 @@
-package de.bremen.jTimetable.Classes;
-
-import java.sql.Statement;
+package de.bremen.jTimetable.classes;
 
 public interface GUIConnector {
 

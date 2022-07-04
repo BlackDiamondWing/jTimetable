@@ -1,15 +1,17 @@
-package de.bremen.jTimetable.Classes;
+package de.bremen.jTimetable.classes;
 
 public class Lecturer extends GeneralValue{
-    //TODO check caption
+
     /**
      *
      */
     private String firstName;
+
     /**
      *
      */
     private String lastName;
+
     /**
      *
      */

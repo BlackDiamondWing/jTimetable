@@ -1,4 +1,4 @@
-package de.bremen.jTimetable.Classes;
+package de.bremen.jTimetable.classes;
 
 /**
  *
@@ -15,4 +15,5 @@ public class Location extends GeneralValue{
     public Location(String caption, int id, boolean active) {
         super(caption, id, active);
     }
+
 }
