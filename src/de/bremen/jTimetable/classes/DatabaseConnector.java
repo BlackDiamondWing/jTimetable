@@ -2,30 +2,94 @@ package de.bremen.jTimetable.classes;
 
 import java.sql.*;
 
+/**
+ * This class represents the connection to the database and is the only class with direct access
+ * to it.
+ */
 public class DatabaseConnector {
 
     /**
-     * Fills the class variable connection with a connection to the database
-     * The returned connection needs ti closed!
+     * Default Constructor.
+     * Create tables if they don't already exist
+     */
+    protected DatabaseConnector() {
+        //Establish a connection to the database to create tables if they don't exist
+        try (Connection con = connect()) {
+            //PreparedStatementString for Location and Subject
+            String prepStringLocSub = "CREATE TABLE IF NOT EXISTS " +
+                    "?(id_? INTEGER AUTO_INCREMENT NOT NULL PRIMARY KEY, " +
+                    "caption VARCHAR NOT NULL, " +
+                    "active BOOLEAN NOT NULL)";
+            //Create Location table
+            PreparedStatement prepLoc = con.prepareStatement(prepStringLocSub);
+            prepLoc.setString(1, "LOCATION");
+            prepLoc.setString(2, "location");
+            prepLoc.executeQuery();
+            //Create Subject table
+            PreparedStatement prepSub = con.prepareStatement(prepStringLocSub);
+            prepSub.setString(1, "SUBJECT");
+            prepSub.setString(2, "subject");
+            prepSub.executeQuery();
+
+            String prepStringRoom = "CREATE TABLE IF NOT EXISTS " +
+                    "ROOM(id_room INTEGER AUTO_INCREMENT NOT NULL PRIMARY KEY, " +
+                    "caption VARCHAR NOT NULL, " +
+                    "active BOOLEAN NOT NULL, " +
+                    "id_location_room INTEGER NOT NULL)";
+            //Create Room table
+            Statement stmRoom = con.createStatement();
+            stmRoom.executeQuery(prepStringRoom);
+
+            String prepStringCourseOfStudy = "CREATE TABLE IF NOT EXISTS " +
+                    "COURSE_OF_STUDY(id_courseOfStudy INTEGER AUTO_INCREMENT NOT NULL PRIMARY KEY, " +
+                    "caption VARCHAR NOT NULL, " +
+                    "active BOOLEAN NOT NULL, " +
+                    "begin DATE NOT NULL, " +
+                    "end DATE NOT NULL)";
+            //Create CourseOfStudy table
+            Statement stmCourseOfStudy = con.createStatement();
+            stmCourseOfStudy.executeQuery(prepStringCourseOfStudy);
+
+            String prepStringLecturer = "CREATE TABLE IF NOT EXISTS " +
+                    "Lecturer(id_lecturer INTEGER AUTO_INCREMENT NOT NULL PRIMARY KEY, " +
+                    "caption VARCHAR, " +
+                    "active BOOLEAN NOT NULL, " +
+                    "firstname VARCHAR NOT NULL, " +
+                    "lastname VARCHAR NOT NULL, " +
+                    "id_location_lecturer INTEGER NOT NULL)";
+            //Create Lecturer table
+            Statement stmLecturer = con.createStatement();
+            stmCourseOfStudy.executeQuery(prepStringLecturer);
+
+        } catch (SQLException e) {
+            System.err.println("The tables could not be created properly.");
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Creates a connection to the database. The returned connection needs to be closed!
      */
     protected Connection connect() {
-        //TODO generalisieren
-        String jdbcURL = "jdbc:h2:file:C:/Users/loreen.roose1/test.mv.db";
+        //Generic path to db within the project structure TODO check
+        String jdbcURL = "jdbc:h2:file:./TimetableDB.mv.db";
         try {
             //Load drivers and establish connection
             Class.forName("org.h2.Driver");
             return DriverManager.getConnection(jdbcURL, "sa", "");
         } catch (ClassNotFoundException | SQLException e) {
-            System.err.println("Connection could not be established, because the driver class wasn't found.");
+            System.err.println(
+                    "Connection could not be established, because the driver class wasn't found.");
             e.printStackTrace();
-            //TODO wenn keine Exception im catch-Block geschmissen wird, dann wäre weiteres return nötig
             throw new RuntimeException(e);
         }
     }
 
     /**
-     * @param table
-     * @param value
+     * One value will bei added to the table.
+     *
+     * @param table specifies in which table the value should be added
+     * @param value the value that will be added
      */
     private void addValueToTable(String table, GeneralValue value) {
 
@@ -35,10 +99,11 @@ public class DatabaseConnector {
         try (Connection con = connect()) {
             PreparedStatement prep = con.prepareStatement(addString.toString());
 
+            //TODO Check whether general value type and table match
             if (value instanceof CourseOfStudy) {
 
                 addString.append("(?, ?, ?, ?, ?)");
-            //    prep.setString();
+                //    prep.setString();
             } else if (value instanceof Lecturer) {
                 addString.append("(?, ?, ?, ?, ?, ?)");
             } else {
@@ -47,18 +112,17 @@ public class DatabaseConnector {
 
             prep.execute();
             System.out.println();
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+        } catch (SQLException e) {
+            System.err.println("The value couldn't be added to the specified table properly.");
+            e.printStackTrace();
         }
-        throw new UnsupportedOperationException(
-                "Method addValueToTable in class DatabaseConnector " +
-                        "isn't implemented yet.");
-        //TODO
     }
 
     /**
-     * @param table
-     * @param values
+     * Several values of the same type will be added to the specified table
+     *
+     * @param table  specifies in which table the values should be added
+     * @param values the values that will be added
      */
     private void addValuesToTable(String table, GeneralValue[] values) {
         //try with resources --> automatically closed after try-block
@@ -79,50 +143,21 @@ public class DatabaseConnector {
                 ps.execute(sqlString.toString());
             }
         } catch (SQLException e) {
-            //TODO
-            throw new RuntimeException(e);
+            System.err.println("The value couldn't be added to the specified table properly.");
+            e.printStackTrace();
         }
     }
 
+    /**
+     * TODO nach welchen kriterien wird selektiert?
+     *
+     * @param table
+     * @param id
+     * @return
+     */
     public ResultSet select(String table, Integer[] id) {
         throw new UnsupportedOperationException();
     }
 
-    /**
-     * TODO Das ist eine Testmethode (weg damit)
-     *
-     * @param args
-     */
-    public static void main(String[] args) {
-        String jdbcURL = "jdbc:h2:file:C:/Users/loreen.roose1/test.mv.db";
-        try {
-            //Treiber laden und verbinden
-            Class.forName("org.h2.Driver");
-            Connection con = DriverManager.getConnection(jdbcURL, "sa", "");
-
-            // Statement Objekt erstellen
-            Statement stm = con.createStatement();
-
-            // Tabelle erstellen
-            String sql_create = "CREATE TABLE IF NOT EXISTS kunden(id INTEGER, name VARCHAR(50), vip BOOLEAN);";
-            stm.execute(sql_create);
-            System.out.println("Tabelle kunden wurde angelegt");
-            // Datensatz einfügen
-            String sql_insert = "INSERT INTO kunden(id, name, vip) VALUES(1, 'El Haberer', FALSE)";
-            stm.execute(sql_insert);
-            System.out.println("Werte in Kunden eingefügt.");
-            // Datensatz auslesen
-            String sql_select = "SELECT * FROM kunden";
-            ResultSet rs = stm.executeQuery(sql_select);
-            while (rs.next()) {
-                System.out.println(rs.getString(1) + " " +
-                        rs.getString(2) + " " +
-                        rs.getString(3));
-            }
-            con.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 }
 

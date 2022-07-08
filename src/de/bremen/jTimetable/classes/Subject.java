@@ -5,7 +5,6 @@ package de.bremen.jTimetable.classes;
  */
 public class Subject extends GeneralValue{
 
-
     /**
      * Constructor.
      *

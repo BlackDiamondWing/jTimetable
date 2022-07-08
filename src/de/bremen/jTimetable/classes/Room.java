@@ -6,15 +6,16 @@ public class Room extends GeneralValue{
     /**
      * Reference to the Location.
      */
-    private long refLocationId;
+    private int refLocationId;
 
     /**
      * @param caption
      * @param id
      * @param active
      */
-    public Room(String caption, int id, boolean active) {
+    public Room(String caption, int id, boolean active, int refLocationId) {
         super(caption, id, active);
+        this.refLocationId = refLocationId;
     }
 
 }

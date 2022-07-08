@@ -1,6 +1,6 @@
 package de.bremen.jTimetable.classes;
 
-public class Lecturer extends GeneralValue{
+public class Lecturer extends GeneralValue {
 
     /**
      *
@@ -13,7 +13,7 @@ public class Lecturer extends GeneralValue{
     private String lastName;
 
     /**
-     *
+     * TODO wieso zur Location?
      */
     private int refLocationId;
 
@@ -23,7 +23,11 @@ public class Lecturer extends GeneralValue{
      * @param caption
      * @param id
      */
-    public Lecturer(String caption, int id, boolean active) {
+    public Lecturer(String caption, int id, boolean active, String firstName, String lastName,
+                    int refLocationId) {
         super(caption, id, active);
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.refLocationId = refLocationId;
     }
 }
