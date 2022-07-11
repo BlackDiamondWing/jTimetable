@@ -1,21 +1,34 @@
 package de.bremen.jTimetable.classes;
 
-public class Room extends GeneralValue{
+/**
+ * Sub-class of GeneralValue which represents a room in a Location that can be booked for a Subject.
+ */
+public class Room extends GeneralValue {
 
 
     /**
-     * Reference to the Location.
+     * Reference to the Location where the room is.
      */
-    private int refLocationId;
+    private final int location;
 
     /**
-     * @param caption
-     * @param id
-     * @param active
+     * Constructor.
+     *
+     * @param caption this.caption
+     * @param id      this.id
+     * @param active  this.active
      */
-    public Room(String caption, int id, boolean active, int refLocationId) {
+    public Room(String caption, int id, boolean active, int location) {
         super(caption, id, active);
-        this.refLocationId = refLocationId;
+        this.location = location;
     }
 
+    /**
+     * Getter for Location reference
+     *
+     * @return this.location
+     */
+    public int getLocation() {
+        return location;
+    }
 }

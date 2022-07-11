@@ -15,6 +15,7 @@ public class DatabaseConnector {
     protected DatabaseConnector() {
         //Establish a connection to the database to create tables if they don't exist
         try (Connection con = connect()) {
+            Statement stm = con.createStatement();
             //PreparedStatementString for Location and Subject
             String prepStringLocSub = "CREATE TABLE IF NOT EXISTS " +
                     "?(id_? INTEGER AUTO_INCREMENT NOT NULL PRIMARY KEY, " +
@@ -37,8 +38,7 @@ public class DatabaseConnector {
                     "active BOOLEAN NOT NULL, " +
                     "id_location_room INTEGER NOT NULL)";
             //Create Room table
-            Statement stmRoom = con.createStatement();
-            stmRoom.executeQuery(prepStringRoom);
+            stm.executeQuery(prepStringRoom);
 
             String prepStringCourseOfStudy = "CREATE TABLE IF NOT EXISTS " +
                     "COURSE_OF_STUDY(id_courseOfStudy INTEGER AUTO_INCREMENT NOT NULL PRIMARY KEY, " +
@@ -47,8 +47,7 @@ public class DatabaseConnector {
                     "begin DATE NOT NULL, " +
                     "end DATE NOT NULL)";
             //Create CourseOfStudy table
-            Statement stmCourseOfStudy = con.createStatement();
-            stmCourseOfStudy.executeQuery(prepStringCourseOfStudy);
+            stm.executeQuery(prepStringCourseOfStudy);
 
             String prepStringLecturer = "CREATE TABLE IF NOT EXISTS " +
                     "Lecturer(id_lecturer INTEGER AUTO_INCREMENT NOT NULL PRIMARY KEY, " +
@@ -58,8 +57,7 @@ public class DatabaseConnector {
                     "lastname VARCHAR NOT NULL, " +
                     "id_location_lecturer INTEGER NOT NULL)";
             //Create Lecturer table
-            Statement stmLecturer = con.createStatement();
-            stmCourseOfStudy.executeQuery(prepStringLecturer);
+            stm.executeQuery(prepStringLecturer);
 
         } catch (SQLException e) {
             System.err.println("The tables could not be created properly.");
@@ -71,7 +69,8 @@ public class DatabaseConnector {
      * Creates a connection to the database. The returned connection needs to be closed!
      */
     protected Connection connect() {
-        //Generic path to db within the project structure TODO check
+        //Generic path to db within the project structure
+        //TODO Datenbank außerhalb der jar
         String jdbcURL = "jdbc:h2:file:./TimetableDB.mv.db";
         try {
             //Load drivers and establish connection
@@ -101,7 +100,8 @@ public class DatabaseConnector {
 
             //TODO Check whether general value type and table match
             if (value instanceof CourseOfStudy) {
-
+                CourseOfStudy course = (CourseOfStudy) value;
+                int id = course.getId();
                 addString.append("(?, ?, ?, ?, ?)");
                 //    prep.setString();
             } else if (value instanceof Lecturer) {

@@ -18,6 +18,7 @@ public class logic {
 
     /**
      * Constructor.
+     *
      * @param gui connection to the gui
      */
     public logic(GUIConnector gui) {

@@ -1,33 +1,68 @@
 package de.bremen.jTimetable.classes;
 
+/**
+ * This class represents one lecturer which extends GeneralValue. The Lecturer can teach several subjects and is at a
+ * location. If they change locations the time they need to get there needs to be considered.
+ */
 public class Lecturer extends GeneralValue {
 
     /**
-     *
+     * Lecturers firstname.
      */
-    private String firstName;
+    private final String firstName;
 
     /**
-     *
+     * Lecturers lastname.
      */
-    private String lastName;
+    private final String lastName;
 
     /**
-     * TODO wieso zur Location?
+     * Reference to the location where the lecturer is so that the time between changing locations can be determined.
      */
-    private int refLocationId;
+    private final Location location;
 
     /**
      * Constructor.
      *
-     * @param caption
-     * @param id
+     * @param caption   this.caption
+     * @param id        this.id
+     * @param active    this.active
+     * @param firstName this.firstName
+     * @param lastName  this.lastName
+     * @param location  this.location
      */
     public Lecturer(String caption, int id, boolean active, String firstName, String lastName,
-                    int refLocationId) {
+                    Location location) {
         super(caption, id, active);
         this.firstName = firstName;
         this.lastName = lastName;
-        this.refLocationId = refLocationId;
+        this.location = location;
+    }
+
+    /**
+     * Getter for firstName.
+     *
+     * @return this.firstName
+     */
+    public String getFirstName() {
+        return firstName;
+    }
+
+    /**
+     * Getter for lastName
+     *
+     * @return this.lastName
+     */
+    public String getLastName() {
+        return lastName;
+    }
+
+    /**
+     * Getter for location reference.
+     *
+     * @return this.location
+     */
+    public Location getLocation() {
+        return location;
     }
 }
