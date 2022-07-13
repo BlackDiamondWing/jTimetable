@@ -19,14 +19,14 @@ public class CourseOfStudy extends GeneralValue {
     /**
      * Constructor.
      *
-     * @param caption this.casption
      * @param id      this.id
+     * @param caption this.caption
      * @param active  this.active
      * @param begin   this.begin
      * @param end     this.end
      */
-    public CourseOfStudy(String caption, int id, boolean active, LocalDate begin, LocalDate end) {
-        super(caption, id, active);
+    public CourseOfStudy(int id, String caption, boolean active, LocalDate begin, LocalDate end) {
+        super(id, caption, active);
         this.begin = begin;
         this.end = end;
     }

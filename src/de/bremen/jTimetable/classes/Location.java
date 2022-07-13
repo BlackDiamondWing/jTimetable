@@ -9,12 +9,12 @@ public class Location extends GeneralValue {
     /**
      * Constructor.
      *
-     * @param caption this.caption
      * @param id      this.id
+     * @param caption this.caption
      * @param active  this.active
      */
-    public Location(String caption, int id, boolean active) {
-        super(caption, id, active);
+    public Location(int id, String caption, boolean active) {
+        super(id, caption, active);
     }
 
 }

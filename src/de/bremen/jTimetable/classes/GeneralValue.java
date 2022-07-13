@@ -23,13 +23,13 @@ public abstract class GeneralValue {
     /**
      * Constructor.
      *
-     * @param caption this.caption
      * @param id      this.id
+     * @param caption this.caption
      * @param active  this.active
      */
-    public GeneralValue(String caption, int id, boolean active) {
-        this.caption = caption;
+    public GeneralValue(int id, String caption, boolean active) {
         this.id = id;
+        this.caption = caption;
         this.active = active;
     }
 
@@ -67,4 +67,23 @@ public abstract class GeneralValue {
     public void setId(int id) {
         this.id = id;
     }
+
+//    /**
+//     *
+//     * @return
+//     */
+//    public String toSQLString() {
+//        StringBuilder sb = new StringBuilder("(").append(getId()).append(", ").append(getCaption())
+//                .append(", ").append(isActive());
+//        this.toSQLString(sb);
+//        sb.append(")");
+//        return sb.toString();
+//    }
+//
+//    /**
+//     *
+//     * @param sb
+//     * @return
+//     */
+//    public abstract String toSQLString(StringBuilder sb);
 }

@@ -9,17 +9,17 @@ public class Room extends GeneralValue {
     /**
      * Reference to the Location where the room is.
      */
-    private final int location;
+    private final Location location;
 
     /**
      * Constructor.
      *
-     * @param caption this.caption
      * @param id      this.id
+     * @param caption this.caption
      * @param active  this.active
      */
-    public Room(String caption, int id, boolean active, int location) {
-        super(caption, id, active);
+    public Room(int id, String caption, boolean active, Location location) {
+        super(id, caption, active);
         this.location = location;
     }
 
@@ -28,7 +28,7 @@ public class Room extends GeneralValue {
      *
      * @return this.location
      */
-    public int getLocation() {
+    public Location getLocation() {
         return location;
     }
 }

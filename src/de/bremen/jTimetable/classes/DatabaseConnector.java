@@ -17,6 +17,7 @@ public class DatabaseConnector {
         try (Connection con = connect()) {
             Statement stm = con.createStatement();
             //PreparedStatementString for Location and Subject
+            //TODO Fehler, Test im SQL Statement?
             String prepStringLocSub = "CREATE TABLE IF NOT EXISTS " +
                     "?(id_? INTEGER AUTO_INCREMENT NOT NULL PRIMARY KEY, " +
                     "caption VARCHAR NOT NULL, " +
@@ -71,7 +72,8 @@ public class DatabaseConnector {
     protected Connection connect() {
         //Generic path to db within the project structure
         //TODO Datenbank außerhalb der jar
-        String jdbcURL = "jdbc:h2:file:./TimetableDB.mv.db";
+        //..jTimetable..bremen..de..src..jTimetable.. next to project
+        String jdbcURL = "jdbc:h2:file:../../TimetableDB.mv.db";
         try {
             //Load drivers and establish connection
             Class.forName("org.h2.Driver");
@@ -127,19 +129,32 @@ public class DatabaseConnector {
     private void addValuesToTable(String table, GeneralValue[] values) {
         //try with resources --> automatically closed after try-block
         try (Connection con = connect()) {
-            //create statement object
-            PreparedStatement ps = con
-                    .prepareStatement("SELECT * FROM " + table + " WHERE id=?");
-
             if (values != null) {
-                StringBuilder sqlString = new StringBuilder("INSERT INTO ").append(table);
+                StringBuilder sqlString = new StringBuilder("INSERT INTO ").append(table)
+                        .append("(caption, active");
+
+                if (table.equalsIgnoreCase("CourseOfStudy")) {
+                    sqlString.append(", begin, end) VALUES(?, ?, ?, ?)");
+                    //Daraus PreparedStatement machen
+                    //aus den generalValues CourseOfstudy Objekte machen
+                    //Werte einfügen und ausführen
+                    //TODO Weg nur ein Query, aber mit PreparedStatement?
+                } else if (table.equalsIgnoreCase("Lecturer")) {
+                    sqlString.append(", firstname, lastname, location");
+                } else if (table.equalsIgnoreCase("Room")) {
+                    sqlString.append(", location");
+                }
+
                 for (GeneralValue value : values) {
+
                     if (value instanceof CourseOfStudy) {
 
                     } else if (value instanceof Lecturer) {
 
                     }
                 }
+                //create statement object
+                PreparedStatement ps = con.prepareStatement("");
                 ps.execute(sqlString.toString());
             }
         } catch (SQLException e) {
@@ -156,6 +171,13 @@ public class DatabaseConnector {
      * @return
      */
     public ResultSet select(String table, Integer[] id) {
+        try (Connection con = connect()) {
+            PreparedStatement ps = con
+                    .prepareStatement("SELECT * FROM " + table + " WHERE id=?");
+        } catch (SQLException e) {
+            System.err.println("The value couldn't be selected from the specified table properly.");
+            e.printStackTrace();
+        }
         throw new UnsupportedOperationException();
     }
 

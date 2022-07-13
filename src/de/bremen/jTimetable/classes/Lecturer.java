@@ -24,16 +24,16 @@ public class Lecturer extends GeneralValue {
     /**
      * Constructor.
      *
-     * @param caption   this.caption
      * @param id        this.id
+     * @param caption   this.caption
      * @param active    this.active
      * @param firstName this.firstName
      * @param lastName  this.lastName
      * @param location  this.location
      */
-    public Lecturer(String caption, int id, boolean active, String firstName, String lastName,
+    public Lecturer(int id, String caption, boolean active, String firstName, String lastName,
                     Location location) {
-        super(caption, id, active);
+        super(id, caption, active);
         this.firstName = firstName;
         this.lastName = lastName;
         this.location = location;

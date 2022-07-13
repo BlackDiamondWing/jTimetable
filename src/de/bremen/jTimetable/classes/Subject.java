@@ -8,11 +8,11 @@ public class Subject extends GeneralValue {
     /**
      * Constructor.
      *
-     * @param caption this.caption
      * @param id      this.id
+     * @param caption this.caption
      * @param active  this.active
      */
-    public Subject(String caption, int id, boolean active) {
-        super(caption, id, active);
+    public Subject(int id, String caption, boolean active) {
+        super(id, caption, active);
     }
 }
