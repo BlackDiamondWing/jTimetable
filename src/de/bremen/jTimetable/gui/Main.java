@@ -6,21 +6,19 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import java.io.IOException;
+
 public class Main extends Application {
     @Override
-    public void start(Stage stage) {
-        try {
-            Parent root = FXMLLoader.load(getClass().getResource("Menu.fxml"));
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    public void start(Stage stage) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Menu.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 320, 240);
+        stage.setTitle("Menü Stundenplansoftware");
+        stage.setScene(scene);
+        stage.show();
     }
 
     public static void main(String[] args) {
-        System.out.println("Ausgabe aus der main()-Methode");
+        launch(args);
     }
 }
