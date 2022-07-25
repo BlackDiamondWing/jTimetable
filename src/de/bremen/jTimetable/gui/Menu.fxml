@@ -1,15 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.bremen.jTimetable.gui.MenuController">
+<AnchorPane prefHeight="300.0" prefWidth="200.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.bremen.jTimetable.gui.MenuController">
    <children>
-      <VBox prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <VBox prefHeight="300.0" prefWidth="200.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Button fx:id="btn_showTimetable" mnemonicParsing="false" onAction="#handle_showTimetable" text="Stundenplan laden" />
-            <DatePicker />
-            <Button fx:id="btn_switchToSettings" mnemonicParsing="false" onAction="#handle_switchToSettings" text="Einstellungen" />
-         </children></VBox>
+            <MenuButton fx:id="mnbtn_typeOfObject" mnemonicParsing="false" prefWidth="180.0" text="Art des Objekts">
+              <items>
+                <MenuItem mnemonicParsing="false" onAction="#handle_typeOfObject" text="Raum" />
+                <MenuItem mnemonicParsing="false" text="Action 2" />
+              </items>
+            </MenuButton>
+            <Label fx:id="lbl_typeOfObject" prefWidth="180.0" />
+            <MenuButton fx:id="mnbtn_selectTimetableFor" mnemonicParsing="false" onAction="#handle_selectTimetableFor" prefWidth="180.0" text="Stundenplan für:">
+              <items>
+                <MenuItem mnemonicParsing="false" text="Action 1" />
+                <MenuItem mnemonicParsing="false" text="Action 2" />
+              </items>
+            </MenuButton>
+            <Label fx:id="lbl_selectTimetableFor" prefHeight="17.0" prefWidth="178.0" />
+            <DatePicker fx:id="dtpckr_selectDateForTimetable" prefWidth="180.0" />
+            <Button fx:id="btn_showTimetable" mnemonicParsing="false" onAction="#handle_showTimetable" prefWidth="180.0" text="Stundenplan laden" />
+            <Button fx:id="btn_switchToSettings" mnemonicParsing="false" onAction="#handle_switchToSettings" prefWidth="180.0" text="Einstellungen" />
+            <Label fx:id="lbl_mistakeMessage" prefWidth="180.0" />
+         </children>
+         <padding>
+            <Insets left="10.0" right="10.0" top="20.0" />
+         </padding></VBox>
    </children>
 </AnchorPane>
