@@ -11,16 +11,12 @@
             <MenuButton fx:id="mnbtn_typeOfObject" mnemonicParsing="false" prefWidth="180.0" text="Art des Objekts">
               <items>
                 <MenuItem mnemonicParsing="false" onAction="#handle_typeOfObject" text="Raum" />
-                <MenuItem mnemonicParsing="false" text="Action 2" />
+                <MenuItem mnemonicParsing="false" onAction="#handle_typeOfObject" text="Dozent" />
+                  <MenuItem mnemonicParsing="false" onAction="#handle_typeOfObject" text="Klasse" />
               </items>
             </MenuButton>
             <Label fx:id="lbl_typeOfObject" prefWidth="180.0" />
-            <MenuButton fx:id="mnbtn_selectTimetableFor" mnemonicParsing="false" onAction="#handle_selectTimetableFor" prefWidth="180.0" text="Stundenplan für:">
-              <items>
-                <MenuItem mnemonicParsing="false" text="Action 1" />
-                <MenuItem mnemonicParsing="false" text="Action 2" />
-              </items>
-            </MenuButton>
+            <MenuButton fx:id="mnbtn_selectTimetableFor" mnemonicParsing="false" prefWidth="180.0" text="Stundenplan für:" />
             <Label fx:id="lbl_selectTimetableFor" prefHeight="17.0" prefWidth="178.0" />
             <DatePicker fx:id="dtpckr_selectDateForTimetable" prefWidth="180.0" />
             <Button fx:id="btn_showTimetable" mnemonicParsing="false" onAction="#handle_showTimetable" prefWidth="180.0" text="Stundenplan laden" />

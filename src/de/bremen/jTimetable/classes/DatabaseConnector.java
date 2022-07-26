@@ -12,7 +12,8 @@ public class DatabaseConnector {
      * Default Constructor.
      * Create tables if they don't already exist
      */
-    protected DatabaseConnector() {
+    public DatabaseConnector() {
+        //TODO Namen der Tabellen sollten auf deutsch benannt werden.
         //Establish a connection to the database to create tables if they don't exist
         try (Connection con = connect()) {
             Statement stm = con.createStatement();
@@ -34,7 +35,7 @@ public class DatabaseConnector {
             prepSub.executeQuery();
 
             String prepStringRoom = "CREATE TABLE IF NOT EXISTS " +
-                    "ROOM(id_room INTEGER AUTO_INCREMENT NOT NULL PRIMARY KEY, " +
+                    "RAUM(id_room INTEGER AUTO_INCREMENT NOT NULL PRIMARY KEY, " +
                     "caption VARCHAR NOT NULL, " +
                     "active BOOLEAN NOT NULL, " +
                     "id_location_room INTEGER NOT NULL)";
@@ -51,7 +52,7 @@ public class DatabaseConnector {
             stm.executeQuery(prepStringCourseOfStudy);
 
             String prepStringLecturer = "CREATE TABLE IF NOT EXISTS " +
-                    "Lecturer(id_lecturer INTEGER AUTO_INCREMENT NOT NULL PRIMARY KEY, " +
+                    "Dozent(id_lecturer INTEGER AUTO_INCREMENT NOT NULL PRIMARY KEY, " +
                     "caption VARCHAR, " +
                     "active BOOLEAN NOT NULL, " +
                     "firstname VARCHAR NOT NULL, " +
@@ -174,6 +175,23 @@ public class DatabaseConnector {
         try (Connection con = connect()) {
             PreparedStatement ps = con
                     .prepareStatement("SELECT * FROM " + table + " WHERE id=?");
+        } catch (SQLException e) {
+            System.err.println("The value couldn't be selected from the specified table properly.");
+            e.printStackTrace();
+        }
+        throw new UnsupportedOperationException();
+    }
+
+    /**
+     * Selects all entries from the given table.
+     *
+     * @param table
+     * @return
+     */
+    public ResultSet select(String table) {
+        try (Connection con = connect()) {
+            PreparedStatement ps = con
+                    .prepareStatement("SELECT * FROM " + table);
         } catch (SQLException e) {
             System.err.println("The value couldn't be selected from the specified table properly.");
             e.printStackTrace();
