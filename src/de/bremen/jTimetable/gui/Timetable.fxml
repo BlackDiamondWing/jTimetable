@@ -101,14 +101,15 @@
          <top>
             <MenuBar BorderPane.alignment="CENTER">
               <menus>
-                <Menu mnemonicParsing="false" onAction="#handle_switchToMenu" text="Menü">
+                <Menu mnemonicParsing="false" text="Navigation">
                   <items>
-                    <MenuItem mnemonicParsing="false" text="Close" />
+                    <MenuItem mnemonicParsing="false" onAction="#handle_switchToMenu" text="Menü" />
+                        <MenuItem mnemonicParsing="false" onAction="#handle_switchToSettings" text="Einstellunge" />
                   </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Speichern">
                   <items>
-                    <MenuItem mnemonicParsing="false" text="Delete" />
+                    <MenuItem mnemonicParsing="false" onAction="#handle_saveTimetable" text="Speichern" />
                   </items>
                 </Menu>
               </menus>

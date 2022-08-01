@@ -25,4 +25,16 @@ public class TimetableController implements Initializable {
         stage.setScene(scene);
         stage.show();
     }
+
+    public void handle_switchToSettings(ActionEvent actionEvent) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Settings.fxml"));
+        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        Scene scene = new Scene(fxmlLoader.load(), 320, 240);
+        stage.setTitle("Einstellungen");
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    public void handle_saveTimetable(ActionEvent actionEvent) {
+    }
 }

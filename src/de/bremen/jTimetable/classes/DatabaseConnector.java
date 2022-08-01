@@ -1,5 +1,9 @@
 package de.bremen.jTimetable.classes;
 
+import de.bremen.jTimetable.classes.valueTypes.Course;
+import de.bremen.jTimetable.classes.valueTypes.GeneralValue;
+import de.bremen.jTimetable.classes.valueTypes.Lecturer;
+
 import java.sql.*;
 
 /**
@@ -102,8 +106,8 @@ public class DatabaseConnector {
             PreparedStatement prep = con.prepareStatement(addString.toString());
 
             //TODO Check whether general value type and table match
-            if (value instanceof CourseOfStudy) {
-                CourseOfStudy course = (CourseOfStudy) value;
+            if (value instanceof Course) {
+                Course course = (Course) value;
                 int id = course.getId();
                 addString.append("(?, ?, ?, ?, ?)");
                 //    prep.setString();
@@ -148,7 +152,7 @@ public class DatabaseConnector {
 
                 for (GeneralValue value : values) {
 
-                    if (value instanceof CourseOfStudy) {
+                    if (value instanceof Course) {
 
                     } else if (value instanceof Lecturer) {
 
@@ -192,6 +196,7 @@ public class DatabaseConnector {
         try (Connection con = connect()) {
             PreparedStatement ps = con
                     .prepareStatement("SELECT * FROM " + table);
+            //TODO execute statement
         } catch (SQLException e) {
             System.err.println("The value couldn't be selected from the specified table properly.");
             e.printStackTrace();

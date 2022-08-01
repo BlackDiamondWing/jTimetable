@@ -1,5 +1,7 @@
 package de.bremen.jTimetable.classes;
 
+import de.bremen.jTimetable.classes.valueTypes.GeneralValue;
+
 public interface GUIConnector {
 
     /**

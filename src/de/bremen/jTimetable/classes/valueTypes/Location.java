@@ -1,4 +1,4 @@
-package de.bremen.jTimetable.classes;
+package de.bremen.jTimetable.classes.valueTypes;
 
 /**
  * Sub-class of GeneralValue that represents a Location which can have several rooms.
